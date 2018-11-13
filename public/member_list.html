@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理账号</title>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <script src="/users/checkState"></script>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-container>
+            <el-main>
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>账号管理</span>
+                    </div>
+                    <div class="text item">
+                        <template>
+                            <el-table :data="tableData"  style="width: 100%">
+                                <el-table-column label="编号">
+                                    <template slot-scope="scope">
+                                        <span>{{ scope.row.u_id }}</span>
+                                    </template>
+                                </el-table-column>
+                                <!--<el-table-column label="账号" prop="username">-->
+                                <!--</el-table-column>-->
+                                <el-table-column label="账号">
+                                    <template slot-scope="scope">
+                                        <span>{{ scope.row.username }}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="用户名组">
+                                    <template slot-scope="scope">
+                                        <span> {{ scope.row.userGroup }}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="日期" prop="createDatetime" :formatter="mydateFormat">
+                                </el-table-column>
+                                <!--<el-table-column label="日期" width="180">-->
+                                    <!--<template slot-scope="scope">-->
+                                        <!--<i class="el-icon-time"></i>-->
+                                        <!--<span style="margin-left: 10px">{{ scope.row.createDatetime }}</span>-->
+                                    <!--</template>-->
+                                <!--</el-table-column>-->
+                                <el-table-column label="操作">
+                                    <template slot-scope="scope">
+                                        <el-button size="mini" @click="handleEdit(scope.row.u_id)" type="primary" plain>
+                                            <i class="el-icon-edit"></i> 编辑</el-button>
+                                        <el-button size="mini" @click="handleDelete(scope.row.u_id)" type="danger" plain>
+                                            <i class="el-icon-delete"></i> 删除</el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </template>
+                    </div>
+                </el-card>
+            </el-main>
+        </el-container>
+    </el-container>
+
+</div>
+<script src="./javascripts/jquery.min.js"></script>
+<script src="./javascripts/vue.min.js"></script>
+<!--引入moment事件格式化的js库-->
+<script src="javascripts/moment-with-locales.min.js"></script>
+<script src="./javascripts/elementUI.js"></script>
+<script>
+    new Vue({
+        //挂载视图
+        el: "#app",
+        data() {
+            return {
+                tableData: []
+            };
+        },
+        methods: {
+            handleEdit(id) {
+                // console.log("编辑的id",id);
+                location.href = "member_edit.html?id="+id;
+            },
+            handleDelete(id) {
+                // 1.获取删除的id，参数传入
+                console.log("删除的id",id);
+                // 2.发起ajax到后端路由执行删除
+                $.get("/users/del/",{id},(result)=>{
+                    console.log(result);
+                    if(result.isOk){
+                        alert(result.msg);
+                        // location.href = "member_list.html";
+                        // location.reload();
+                        this.getDataAjax();
+                    }
+                    else{
+                        alert(result.msg);
+                    }
+                })
+            },
+            getDataAjax(){
+                $.get("/users/list",(userlist)=>{
+                    this.tableData = userlist;
+                })
+            },
+            mydateFormat: function(row,column){
+                let date = row[column.property];
+                if(date == undefined){
+                    return "";
+                }
+                return moment(date).format("YYYY-MM-DD");
+            //    也可将-换为文字 return moment(date).format("YY年MM月DD日")
+            }
+        },
+            mounted : function(){
+                // console.log("页面加载完毕")
+                // let that = this;
+                // $.get("/users/list",function(userlist){
+                //     // console.log("用户数据:" ,userlist);
+                //     that.tableData = userlist;
+                // })
+                this.getDataAjax();
+            }
+    })
+
+</script>
+</body>
+</html>

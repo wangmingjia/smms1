@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+</head>
+<body>
+<div id="app">
+    <el-main>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>账号管理</span>
+            </div>
+            <div class="text item">
+                <!-- 账号管理 -->
+                <template>
+                    <el-table :data="tableData" style="width: 100%">
+                        <el-table-column label="编号" prop="cg_id">
+                        </el-table-column>
+                        <el-table-column label="名称" prop="cg_name">
+                        </el-table-column>
+                        <el-table-column label="父级分类">
+                            <template slot-scope="scope">
+                                <span> {{ scope.row.father_name }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="操作">
+                            <template slot-scope="scope">
+                                <el-button size="mini" @click="handleEdit(scope.row.cg_id)" type="primary" plain>
+                                    <i class="el-icon-edit"></i> 编辑</el-button>
+                                <el-button size="mini" @click="handleDelete(scope.row.cg_id)" type="danger" plain>
+                                    <i class="el-icon-delete"></i> 删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </div>
+        </el-card>
+    </el-main>
+</div>
+<script src="./javascripts/jquery.min.js"></script>
+<script src="./javascripts/vue.min.js"></script>
+<script src="./javascripts/elementUI.js"></script>
+<script>
+    new Vue({
+        //挂载视图
+        el: "#app",
+        data() {
+            return {
+                tableData: []
+            };
+        },
+        methods: {
+            //编辑和删除的方法
+            handleEdit(id) {
+                location.href = "sortEdit.html?id="+id;
+            },
+            handleDelete(id) {
+                $.get("/category/del/",{id},(result)=>{
+                    console.log(result);
+                    if(result.isOk){
+                        alert(result.msg);
+                        this.getDataAjax();
+                    }
+                    else{
+                        alert(result.msg);
+                    }
+                })
+            },
+            //抽取获取数据的ajax请求为一个公共的方法
+            getDataAjax() {
+                $.get("/goods/list", (datalist) => {
+                    datalist.forEach((v)=>{
+                        if(v.father_name == null){
+                            v.father_name = "顶级分类";
+                        }
+                    });
+                    this.tableData = datalist;
+                });
+            }
+        },
+        mounted() {
+            //调用ajax方法获取数据
+            this.getDataAjax();
+        }
+    });
+</script>
+</body>
+</html>

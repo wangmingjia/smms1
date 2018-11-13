@@ -1,0 +1,103 @@
+.el-header, .el-footer {
+   color: #333;
+}
+
+.el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    background:url("../images/left_bg.png") repeat-y;
+    max-width:250px;
+}
+.el-aside a{color: #a6a9ad;text-decoration: none;}
+
+element.style {
+    padding-left: 20px;
+}
+.welcome{color: #a6a9ad;line-height:30px;text-align:right;padding-right:40px;width:210px;}
+.welcome h2{font-size:24px;padding:20px 0;}
+.welcome .sayhi{font-size:14px;}
+.el-menu{background:transparent;border-right:none;padding-right:20px;}
+.el-menu .el-submenu__title {
+    height:33px;
+    background:url("../images/bg2green.png") repeat-x !important;
+    background:transparent;
+    line-height:33px;
+    color:#fff;
+    width:210px;
+    text-align:right;
+    border-radius:5px 0px 0px 5px;
+    font-size:16px;
+    margin:10px 20px;
+    padding-right:20px;
+}
+/*.el-menu-item-group{margin-bottom:10px;}*/
+.el-menu-item-group__title {
+    padding: 0px;
+    height:0px;
+}
+.el-menu .el-submenu__title.active{color:#000;}
+.el-submenu .el-menu-item{
+    color: #a6a9ad;
+    height: 33px;
+    line-height: 33px;
+    width: 210px;
+    border-radius: 3px 0px 0px 3px;
+    margin-left: 20px;
+    text-align: right;
+    padding: 0px 20px;
+}
+.el-menu-item:focus, .el-menu-item:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    color:#fff;
+}
+.el-menu-item.is-active{
+    color:#000;
+}
+.el-icon-arrow-down:before {
+    content: "";
+}
+.el-main {
+    color: #333;
+}
+
+body > .el-container {
+    margin-bottom: 40px;
+}
+html,body,#app,.el-container{
+    height:100%;
+}
+
+.el-header {
+    height: 41px;
+    margin-top: 20px;
+    line-height: 20px;
+}
+
+.el-header h2 {
+    font-size: 22px;
+    line-height: 41px;
+    font-weight: bold;
+}
+
+.el-card__header {
+    background: url("../images/bg2.png") repeat-x;
+    height: 41px;
+    line-height: 41px;
+    padding: 0px 20px;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.el-alert__title{color:#6f7180;}
+.el-alert--warning {background:#DBE3FF;margin-bottom:20px; }
+.data .el-icon-close:before {
+    content: "";
+}
+.copyright{padding:20px 0;font-size:12px;border-top:1px solid #ccc;-margin-top:30px;box-sizing: border-box}
+.el-input {width:50%;}
+.el-input--suffix{width:100%;}
+.priceColor{color:red;}
+

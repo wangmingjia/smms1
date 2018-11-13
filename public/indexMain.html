@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./stylesheets/elementUI.css">
+    <link rel="stylesheet" href="./stylesheets/reset.css">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <script src="/users/checkState"></script>
+</head>
+<body>
+<div id="app">
+    <el-main>
+        <el-card class="box-card">
+            <div slot="header" class="clearfix">
+                <span>系统信息</span>
+            </div>
+            <div class="text item">
+                <el-alert
+                        title="商品总数 5，已经销售的总金额： 890:00。库存商品总价 1235.82"
+                        type="warning"
+                        show-icon>
+                </el-alert>
+                <div class="data">
+                    <el-alert
+                            title="导入数据"
+                            type="warning"
+                            show-icon>
+                    </el-alert>
+                </div>
+                <el-row :gutter="22">
+                    <el-col :span="12">
+                        <el-card class="box-card">
+                            <div slot="header" class="clearfix">
+                                <span>销量排行</span>
+                            </div>
+                            <div class="text item">
+                                <template>
+                                    <el-table
+                                            :data="tableData"
+                                            stripe
+                                            style="width: 100%">
+                                        <el-table-column
+                                                prop="date"
+                                                label="商品名称"
+                                                width="220">
+                                        </el-table-column>
+                                        <el-table-column
+                                                prop="name"
+                                                label="库存"
+                                                width="220">
+                                        </el-table-column>
+                                    </el-table>
+                                </template>
+                            </div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-card class="box-card">
+                            <div slot="header" class="clearfix">
+                                <span>卡片名称</span>
+                            </div>
+                            <div class="text item">
+                                <template>
+                                    <el-table
+                                            :data="tableData"
+                                            stripe
+                                            style="width: 100%">
+                                        <el-table-column
+                                                prop="date"
+                                                label="商品名称"
+                                                width="160">
+                                        </el-table-column>
+                                        <el-table-column
+                                                prop="name"
+                                                label="库存"
+                                                width="140">
+                                        </el-table-column>
+                                        <el-table-column
+                                                prop="name"
+                                                label="操作"
+                                                width="140">
+                                        </el-table-column>
+                                    </el-table>
+                                </template>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+            </div>
+        </el-card>
+    </el-main>
+</div>
+<script src="./javascripts/jquery.min.js"></script>
+<script src="./javascripts/vue.min.js"></script>
+<script src="./javascripts/elementUI.js"></script>
+<script>
+    new Vue({
+        //挂载视图
+        el: "#app",
+        data() {
+            return {
+                tableData: [{
+                    date: '海飞丝去屑洗发水',
+                    name: '8',
+                }, {
+                    date: '茅台酒',
+                    name: '6',
+                }, {
+                    date: '龙凤呈祥',
+                    name: '5',
+                }, {
+                    date: '龙凤呈祥',
+                    name: '2',
+                }]
+            }
+        },
+    });
+</script>
+
+
+
+</body>
+</html>
